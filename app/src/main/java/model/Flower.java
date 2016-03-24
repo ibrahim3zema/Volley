@@ -1,15 +1,13 @@
 package model;
 
-import android.graphics.Bitmap;
-
 public class Flower {
-	private String original_title;
+	private String name;
 
-	public String getOriginal_title() {
-		return original_title;
+	public String getName() {
+		return name;
 	}
 
-	public void setOriginal_title(String original_title) {
-		this.original_title = original_title;
+	public void setName(String name) {
+		this.name = name;
 	}
 }

@@ -26,6 +26,8 @@ import model.Flower;
 import parsers.FlowerJSONParser;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String PHOTOS_BASE_URL =
+            "http://services.hanselandpetal.com/photos/";
     TextView output;
     ProgressBar pb;
     List<Flower> flowerList;
@@ -55,11 +57,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_do_task) {
-               // requestData("http://services.hanselandpetal.com/feeds/flowers.json");
-                requestData("http://api.themoviedb.org/3/movie/popular?api_key=9be7f08976068ddd6a18566f3a565cc1");
-
+            if (isOnline()) {
+                requestData("http://services.hanselandpetal.com/feeds/flowers.json");
+               // requestData("http://api.themoviedb.org/3/movie/popular?api_key=9be7f08976068ddd6a18566f3a565cc1");
+            } else {
                 Toast.makeText(this, "Network isn't available", Toast.LENGTH_LONG).show();
-
+            }
         }
         return false;
     }
@@ -89,14 +92,10 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-   /* protected boolean isOnline() {
+    protected boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
-        } else {
-            return false;
-        }
-    }*/
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
 
 }
